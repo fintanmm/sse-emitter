@@ -67,8 +67,8 @@ app.get('/meters/emits', function (req, res) {
             res.write(`:\n`);
         }
         else {
-            res.write(`id: ${++id}\n`);
-            res.write('event: reading\n');
+            res.write(`id: ${++id}\n\n`);
+            res.write('event: reading\n\n');
             res.write(`data: ${JSON.stringify({ nodeId, reading: genValueFrom() })}\n\n`);
         }
     });
