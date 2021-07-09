@@ -31,7 +31,8 @@ interval(randomTime).subscribe(() => {
             app.locals.serviceState$.next(possibleServiceStates.STOP);
             break;
     }
-    // Reset timer - bug only works on server restart
+    // FIXME:bug only works on server restart
+    // Reset timer
     randomTime = genValueFrom(1, 10) * delay;
     console.log(`Flipping service state. Random time is ${randomTime / 1000} seconds with state of: ${app.locals.serviceState$.value}`);
 });
@@ -68,7 +69,7 @@ app.get('/meters/emits', function (req, res) {
         else {
             res.write(`id: ${++id}\n`);
             res.write('event: reading\n');
-            res.write(`data: ${JSON.stringify({ nodeId, reading: genValueFrom() })}\n`);
+            res.write(`data: ${JSON.stringify({ nodeId, reading: genValueFrom() })}\n\n`);
         }
     });
 
