@@ -64,12 +64,12 @@ app.get('/meters/emits', function (req, res) {
             }
         });
         if (app.locals.serviceState$.value === possibleServiceStates.PAUSE) {
-            res.write(`:\n`);
+            res.write(`:\n\n`);
         }
         else {
             res.write(`id: ${++id}\n\n`);
             res.write('event: reading\n\n');
-            res.write(`data: ${JSON.stringify({ nodeId, reading: genValueFrom() })}\n\n`);
+            res.write(`data: ${JSON.stringify({ nodeId, reading: genValueFrom(), datetime: new Date() })}\n\n`);
         }
     });
 
@@ -81,12 +81,12 @@ app.get('/meters/emits', function (req, res) {
 });
 
 app.get('/services/:state', (req, res) => {
-    
+
     const stateExists = Object.values(possibleServiceStates).filter(state => state === req.params['state']).pop()
     if (stateExists !== possibleServiceStates.STATUS) {
         app.locals.serviceState$.next(stateExists);
     }
-    res.setHeader('Access-Control-Allow-Origin', '*').status(200).json({data: { nodeId, 'status': app.locals.serviceState$.value }});
+    res.setHeader('Access-Control-Allow-Origin', '*').status(200).json({ data: { nodeId, 'status': app.locals.serviceState$.value } });
 });
 
 app.listen(3000);
