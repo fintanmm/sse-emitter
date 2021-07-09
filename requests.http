@@ -1,0 +1,17 @@
+###
+GET http://localhost:3000/meters/emits HTTP/1.1
+
+###
+OPTIONS http://localhost:3000/meters/emits HTTP/1.1
+
+###
+GET http://localhost:3000/services/start HTTP/1.1
+
+###
+GET http://localhost:3000/services/stop HTTP/1.1
+
+###
+GET http://localhost:3000/services/stopped HTTP/1.1
+
+###
+GET http://localhost:3000/services/pause HTTP/1.1
